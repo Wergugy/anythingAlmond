@@ -17,10 +17,20 @@ tabBox.append(homeTab, menuTab, contactTab, bottomBar);
 mainContainer.append(tabBox);
 document.body.append(mainContainer);
 
+const allTabs = Array.from(document.querySelectorAll('.tab'));
+
+const clearCurrent = () => {
+  if (allTabs.some((e) => e.classList.contains('current'))) {
+    allTabs
+      .find((e) => e.classList.contains('current'))
+      .classList.toggle('current');
+  }
+};
+
 const selectCurrent = (l) => {
   l.preventDefault();
+  clearCurrent();
   l.target.classList.add('current');
 };
 
-const allTabs = document.querySelectorAll('.tab');
 allTabs.forEach((e) => e.addEventListener('click', selectCurrent));
