@@ -5,7 +5,7 @@ mainContainer.classList.add('mainContainer');
 const tabBox = document.createElement('div');
 tabBox.classList.add('tabBox');
 const bottomBar = document.createElement('div');
-bottomBar.classList.add('bottomBar');
+bottomBar.classList.add('bottomBar', 'baseColor');
 const homeTab = document.createElement('div');
 homeTab.classList.add('home', 'tab');
 const menuTab = document.createElement('div');
@@ -27,10 +27,41 @@ const clearCurrent = () => {
   }
 };
 
+const matchBottomBar = (l) => {
+  const currentTab = Array.from(l.target.classList).filter(
+    (c) => c !== 'tab' && c !== 'current'
+  );
+  if (bottomBar.classList.contains('baseColor'))
+    bottomBar.classList.replace('baseColor', currentTab);
+  else
+    switch (currentTab.toString()) {
+      case 'home':
+        bottomBar.classList.replace(
+          bottomBar.classList.contains('menu') ? 'menu' : 'contact',
+          currentTab
+        );
+        break;
+      case 'menu':
+        bottomBar.classList.replace(
+          bottomBar.classList.contains('home') ? 'home' : 'contact',
+          currentTab
+        );
+        break;
+      case 'contact':
+        bottomBar.classList.replace(
+          bottomBar.classList.contains('home') ? 'home' : 'menu',
+          currentTab
+        );
+        break;
+      // no default
+    }
+};
+
 const selectCurrent = (l) => {
   l.preventDefault();
   clearCurrent();
   l.target.classList.add('current');
+  matchBottomBar(l);
 };
 
 allTabs.forEach((e) => e.addEventListener('click', selectCurrent));

@@ -18,6 +18,9 @@ div {
   height: 50%;
   width: 100%;
   bottom: 0;
+}
+
+.baseColor {
   background-color: blanchedalmond;
 }
 
