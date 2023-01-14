@@ -150,9 +150,10 @@ div {
   height: calc(100% - 100px); 
 }
 
-.pageContainer {
+.page {
   height: 80%;
   width: 80%;
+  background-color: white;
 }
 
 .tabBox {

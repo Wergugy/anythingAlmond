@@ -13,9 +13,9 @@ menuTab.classList.add('menu', 'tab');
 const contactTab = document.createElement('div');
 contactTab.classList.add('contact', 'tab');
 const contentBox = document.createElement('div');
-contentBox.classList.add('contentBox');
+contentBox.classList.add('contentBox', 'baseColor');
 const pageContainer = document.createElement('div');
-pageContainer.classList.add('pageContainer');
+pageContainer.classList.add('page');
 
 contentBox.append(pageContainer);
 tabBox.append(homeTab, menuTab, contactTab, bottomBar);
@@ -32,7 +32,7 @@ const clearCurrent = () => {
   }
 };
 
-const matchBottomBar = (l) => {
+const matchTheDrapes = (l) => {
   const currentTab = Array.from(l.target.classList).filter(
     (c) => c !== 'tab' && c !== 'current'
   );
@@ -60,13 +60,37 @@ const matchBottomBar = (l) => {
         break;
       // no default
     }
+  if (contentBox.classList.contains('baseColor'))
+    contentBox.classList.replace('baseColor', currentTab);
+  else
+    switch (currentTab.toString()) {
+      case 'home':
+        contentBox.classList.replace(
+          contentBox.classList.contains('menu') ? 'menu' : 'contact',
+          currentTab
+        );
+        break;
+      case 'menu':
+        contentBox.classList.replace(
+          contentBox.classList.contains('home') ? 'home' : 'contact',
+          currentTab
+        );
+        break;
+      case 'contact':
+        contentBox.classList.replace(
+          contentBox.classList.contains('home') ? 'home' : 'menu',
+          currentTab
+        );
+        break;
+      // no default
+    }
 };
 
 const selectCurrent = (l) => {
   l.preventDefault();
   clearCurrent();
   l.target.classList.add('current');
-  matchBottomBar(l);
+  matchTheDrapes(l);
 };
 
 allTabs.forEach((e) => e.addEventListener('click', selectCurrent));
