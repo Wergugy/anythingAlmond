@@ -12,9 +12,14 @@ const menuTab = document.createElement('div');
 menuTab.classList.add('menu', 'tab');
 const contactTab = document.createElement('div');
 contactTab.classList.add('contact', 'tab');
+const contentBox = document.createElement('div');
+contentBox.classList.add('contentBox');
+const pageContainer = document.createElement('div');
+pageContainer.classList.add('pageContainer');
 
+contentBox.append(pageContainer);
 tabBox.append(homeTab, menuTab, contactTab, bottomBar);
-mainContainer.append(tabBox);
+mainContainer.append(tabBox, contentBox);
 document.body.append(mainContainer);
 
 const allTabs = Array.from(document.querySelectorAll('.tab'));
