@@ -28,6 +28,10 @@ const allTabs = Array.from(document.querySelectorAll('.tab'));
 let prevTab = 'home';
 createHome(null, page);
 
+const clearPage = () => {
+    
+}
+
 const clearCurrent = () => {
     if (allTabs.some((e) => e.classList.contains('current'))) {
         allTabs
