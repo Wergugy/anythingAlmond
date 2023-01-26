@@ -25,7 +25,7 @@ document.body.append(mainContainer);
 
 const allTabs = Array.from(document.querySelectorAll('.tab'));
 
-let prevTab;
+let prevTab = 'home';
 createHome(null, page);
 
 const clearCurrent = () => {
