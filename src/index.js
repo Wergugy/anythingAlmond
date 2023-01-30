@@ -1,5 +1,7 @@
 import './style.css';
 import createHome from './home';
+import createContact from './contact';
+import createMenu from './menu';
 
 const mainContainer = document.createElement('div');
 mainContainer.classList.add('mainContainer');
@@ -28,19 +30,17 @@ const allTabs = Array.from(document.querySelectorAll('.tab'));
 let prevTab = 'home';
 createHome(null, page);
 
-const clearPage = () => {
-    
-}
-
-const clearCurrent = () => {
+const setCurrentTab = (l) => {
     if (allTabs.some((e) => e.classList.contains('current'))) {
         allTabs
             .find((e) => e.classList.contains('current'))
             .classList.toggle('current');
     }
+    l.target.classList.add('current');
 };
 
 const matchTheDrapes = (l) => {
+    page.replaceChildren();
     const currentTab = Array.from(l.target.classList).filter(
         (c) => c !== 'tab' && c !== 'current'
     ).toString();
@@ -57,6 +57,7 @@ const matchTheDrapes = (l) => {
             );
             break;
         case 'menu':
+            createMenu(prevTab, page);
             bottomBar.classList.replace(
                 bottomBar.classList.contains('home') ? 'home' : 'contact',
                 currentTab
@@ -67,6 +68,7 @@ const matchTheDrapes = (l) => {
             );
             break;
         case 'contact':
+            createContact(prevTab, page);
             bottomBar.classList.replace(
                 bottomBar.classList.contains('home') ? 'home' : 'menu',
                 currentTab
@@ -81,11 +83,10 @@ const matchTheDrapes = (l) => {
     prevTab = currentTab
 };
 
-const selectCurrent = (l) => {
+const selectTab = (l) => {
     l.preventDefault();
-    clearCurrent();
-    l.target.classList.add('current');
+    setCurrentTab(l);
     matchTheDrapes(l);
 };
 
-allTabs.forEach((e) => e.addEventListener('click', selectCurrent));
+allTabs.forEach((e) => e.addEventListener('click', selectTab));
