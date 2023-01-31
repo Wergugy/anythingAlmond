@@ -1,5 +1,6 @@
 body,
-.contentBox {
+.contentBox,
+.hero {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +20,22 @@ div {
   grid-template-columns: 1fr;
 }
 
+.hero {
+  flex-direction: column;
+}
+
+.heroImg {
+  width: 100%;
+  height: 25rem;
+  object-fit: none;
+  object-position: 0 62%;
+}
+
+.heroMsg {
+  word-wrap: normal;
+  width: fit-content;
+}
+
 .mainContainer {
   height: 100vh;
   width: 100vw;
@@ -32,6 +49,7 @@ div {
   height: 90%;
   width: 90%;
   background-color: white;
+  border-radius: 5px;
 }
 
 .tabBox {
@@ -164,6 +182,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  border-radius: inherit;
 }
 /* HTML5 display-role reset for older browsers */
 article,
